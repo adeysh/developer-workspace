@@ -1,14 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Home() {
-  const query = useQuery({
-    queryKey: ["test"],
-    queryFn: async () => {
-      return "React Query Works";
-    },
-  });
+  const { setTheme } = useTheme();
 
-  return <div>{query.data}</div>;
+  return <button onClick={() => setTheme("dark")}>Dark</button>;
 }
