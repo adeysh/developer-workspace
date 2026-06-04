@@ -1,9 +1,15 @@
 "use client";
 
-import { useTheme } from "@/hooks/use-theme";
+import { useSidebar } from "@/providers/sidebar-provider";
 
 export default function Home() {
-  const { setTheme } = useTheme();
+  const { collapsed, toggleSidebar } = useSidebar();
 
-  return <button onClick={() => setTheme("dark")}>Dark</button>;
+  return (
+    <main className="p-8">
+      <p>{collapsed ? "Collapsed" : "Expanded"}</p>
+
+      <button onClick={toggleSidebar}>Toggle Sidebar</button>
+    </main>
+  );
 }
