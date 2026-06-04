@@ -1,10 +1,14 @@
-import { supabase } from "@/lib/supabase";
+"use client";
 
-export default async function Home() {
-  const { data, error } = await supabase.auth.getSession();
+import { useQuery } from "@tanstack/react-query";
 
-  console.log("SESSION:", data);
-  console.log("ERROR:", error);
+export default function Home() {
+  const query = useQuery({
+    queryKey: ["test"],
+    queryFn: async () => {
+      return "React Query Works";
+    },
+  });
 
-  return <h1>Developer Workspace</h1>;
+  return <div>{query.data}</div>;
 }
