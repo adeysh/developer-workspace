@@ -1,5 +1,5 @@
-import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
+import { Sidebar } from "./Sidebar/Sidebar";
 
 type WorkspaceShellProps = {
   children: React.ReactNode;
@@ -7,13 +7,13 @@ type WorkspaceShellProps = {
 
 export function WorkspaceShell({ children }: WorkspaceShellProps) {
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen">
       <Sidebar />
 
-      <div>
+      <div className="flex flex-1 flex-col">
         <Topbar />
 
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
       </div>
     </div>
   );
