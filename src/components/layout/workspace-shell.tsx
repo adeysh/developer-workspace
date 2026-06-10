@@ -1,4 +1,4 @@
-import { Topbar } from "./topbar";
+import { Topbar } from "./Topbar/Topbar";
 import { Sidebar } from "./Sidebar/Sidebar";
 
 type WorkspaceShellProps = {

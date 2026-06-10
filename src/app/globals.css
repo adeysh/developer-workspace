@@ -13,6 +13,8 @@
   --popover-foreground: #111827;
 
   --primary: #5b5ceb;
+  --primary-hover: #4f50d9;
+  --primary-soft: #f3f2ff;
   --primary-foreground: #ffffff;
 
   --secondary: #f3f4f6;
@@ -27,33 +29,91 @@
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
+  --success: #22c55e;
+  --success-soft: #ecfdf5;
+
+  --warning: #f59e0b;
+  --warning-soft: #fff7ed;
+
+  --info: #3b82f6;
+  --info-soft: #eff6ff;
+
   --border: #e7e8ec;
+  --divider: #f0f1f3;
   --input: #e7e8ec;
   --ring: #5b5ceb;
-  --radius: 8px;
 
-  /* custom semantic colors */
+  --tag-purple-bg: #f3f2ff;
+  --tag-purple-text: #5b5ceb;
+
+  --tag-blue-bg: #eff6ff;
+  --tag-blue-text: #2563eb;
+
+  --tag-green-bg: #ecfdf5;
+  --tag-green-text: #16a34a;
+
+  --tag-orange-bg: #fff7ed;
+  --tag-orange-text: #ea580c;
+
+  --tag-pink-bg: #fdf2f8;
+  --tag-pink-text: #db2777;
+}
+
+.dark {
+  --background: #0f1117;
+  --foreground: #f3f4f6;
+
+  --card: #171923;
+  --card-foreground: #f3f4f6;
+
+  --popover: #171923;
+  --popover-foreground: #f3f4f6;
+
+  --primary: #5b5ceb;
+  --primary-hover: #7274ff;
+  --primary-soft: #24284a;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1e2230;
+  --secondary-foreground: #f3f4f6;
+
+  --muted: #1e2230;
+  --muted-foreground: #9ca3af;
+
+  --accent: #1e2230;
+  --accent-foreground: #f3f4f6;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
 
   --success: #22c55e;
+  --success-soft: #163a25;
+
   --warning: #f59e0b;
+  --warning-soft: #3b2a12;
+
   --info: #3b82f6;
+  --info-soft: #182b47;
 
-  --sidebar-width: 280px;
-  --sidebar-collapsed-width: 80px;
+  --border: #2a3040;
+  --divider: #222836;
+  --input: #2a3040;
+  --ring: #7274ff;
 
-  --topbar-height: 64px;
+  --tag-purple-bg: #24284a;
+  --tag-purple-text: #a5a6ff;
 
-  --content-max-width: 1600px;
+  --tag-blue-bg: #182b47;
+  --tag-blue-text: #60a5fa;
 
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 350ms ease;
+  --tag-green-bg: #163a25;
+  --tag-green-text: #4ade80;
 
-  --z-dropdown: 1000;
-  --z-sticky: 1100;
-  --z-drawer: 1200;
-  --z-modal: 1300;
-  --z-toast: 1400;
+  --tag-orange-bg: #3b2a12;
+  --tag-orange-text: #fb923c;
+
+  --tag-pink-bg: #3d1f34;
+  --tag-pink-text: #f472b6;
 }
 
 @theme {
