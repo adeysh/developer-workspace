@@ -30,3 +30,9 @@ export function mapProject(record: ProjectRecord): Project {
     updatedAt: record.updated_at,
   };
 }
+
+export type CreateProjectInput = {
+  name: string;
+  description: string | null;
+  status: ProjectStatus;
+};
