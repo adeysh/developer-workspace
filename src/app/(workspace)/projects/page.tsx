@@ -7,6 +7,7 @@ import {
   useProjects,
   useCreateProject,
   useUpdateProject,
+  useDeleteProject,
 } from "@/features/projects/hooks";
 
 export default function ProjectsPage() {
@@ -22,6 +23,7 @@ export default function ProjectsPage() {
   const { data: projects, isPending, error } = useProjects();
   const createProjectMutation = useCreateProject();
   const updateProjectMutation = useUpdateProject();
+  const deleteProjectMutation = useDeleteProject();
 
   if (isPending) {
     return <div>Loading projects...</div>;
@@ -90,6 +92,18 @@ export default function ProjectsPage() {
         },
       },
     );
+  }
+
+  function handleDelete(projectId: string) {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this project?",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    deleteProjectMutation.mutate(projectId);
   }
 
   return (
@@ -180,6 +194,14 @@ export default function ProjectsPage() {
 
                 <button type="button" onClick={() => handleEdit(project)}>
                   Edit
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleDelete(project.id)}
+                  disabled={deleteProjectMutation.isPending}
+                >
+                  Delete
                 </button>
                 <hr />
               </>
