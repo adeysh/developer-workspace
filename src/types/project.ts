@@ -36,3 +36,10 @@ export type CreateProjectInput = {
   description: string | null;
   status: ProjectStatus;
 };
+
+export type UpdateProjectInput = {
+  id: string;
+  name: string;
+  description: string | null;
+  status: ProjectStatus;
+};
