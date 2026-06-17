@@ -1,7 +1,8 @@
 "use client";
 
-import { useCreateNote, useNotes } from "@/features/notes/hooks";
+import { useCreateNote, useNotes, useUpdateNote } from "@/features/notes/hooks";
 import { useProjects } from "@/features/projects/hooks";
+import type { Note } from "@/types/note";
 import { useState } from "react";
 
 export default function NotesPage() {
@@ -9,9 +10,15 @@ export default function NotesPage() {
   const [content, setContent] = useState("");
   const [projectId, setProjectId] = useState<string | null>(null);
 
+  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editContent, setEditContent] = useState("");
+  const [editProjectId, setEditProjectId] = useState<string | null>(null);
+
   const { data: notes, isPending, isError, error } = useNotes();
   const { data: projects } = useProjects();
   const createNoteMutation = useCreateNote();
+  const updateNoteMutation = useUpdateNote();
 
   if (isPending) {
     return <p>Loading notes...</p>;
@@ -53,6 +60,48 @@ export default function NotesPage() {
     );
   }
 
+  function handleEdit(note: Note) {
+    setEditingNoteId(note.id);
+    setEditTitle(note.title);
+    setEditContent(note.content);
+    setEditProjectId(note.projectId);
+  }
+
+  function handleCancelEdit() {
+    setEditingNoteId(null);
+    setEditTitle("");
+    setEditContent("");
+    setEditProjectId(null);
+  }
+
+  function handleSaveEdit() {
+    if (!editingNoteId) {
+      return;
+    }
+
+    if (!editTitle.trim()) {
+      return;
+    }
+
+    if (!editContent.trim()) {
+      return;
+    }
+
+    updateNoteMutation.mutate(
+      {
+        id: editingNoteId,
+        title: editTitle.trim(),
+        content: editContent.trim(),
+        projectId: editProjectId,
+      },
+      {
+        onSuccess: () => {
+          handleCancelEdit();
+        },
+      },
+    );
+  }
+
   return (
     <section>
       <h1>Notes</h1>
@@ -89,21 +138,77 @@ export default function NotesPage() {
         </button>
       </form>
 
-      {notes?.map((note) => (
-        <div key={note.id}>
-          <h2>{note.title}</h2>
+      {notes?.map((note) => {
+        const isEditing = editingNoteId === note.id;
 
-          <p>{note.content}</p>
+        return (
+          <div key={note.id}>
+            {isEditing ? (
+              <>
+                <input
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  placeholder="Note title"
+                />
 
-          <p>
-            Project:
-            {projects?.find((project) => project.id === note.projectId)?.name ??
-              "No Project"}
-          </p>
+                <textarea
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                  placeholder="Note content"
+                />
 
-          <hr />
-        </div>
-      ))}
+                <select
+                  title="project"
+                  value={editProjectId ?? ""}
+                  onChange={(e) => setEditProjectId(e.target.value || null)}
+                >
+                  <option value="">No Project</option>
+
+                  {projects?.map((project) => (
+                    <option key={project.id} value={project.id}>
+                      {project.name}
+                    </option>
+                  ))}
+                </select>
+
+                <button
+                  type="button"
+                  onClick={handleSaveEdit}
+                  disabled={updateNoteMutation.isPending}
+                >
+                  {updateNoteMutation.isPending ? "Saving..." : "Save"}
+                </button>
+
+                <button type="button" onClick={handleCancelEdit}>
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <h2>{note.title}</h2>
+
+                <p>{note.content}</p>
+
+                <p>
+                  Project:
+                  {projects?.find((project) => project.id === note.projectId)
+                    ?.name ?? "No Project"}
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => handleEdit(note)}
+                  disabled={updateNoteMutation.isPending}
+                >
+                  Edit
+                </button>
+
+                <hr />
+              </>
+            )}
+          </div>
+        );
+      })}
     </section>
   );
 }
