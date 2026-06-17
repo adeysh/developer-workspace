@@ -1,6 +1,11 @@
 "use client";
 
-import { useCreateNote, useNotes, useUpdateNote } from "@/features/notes/hooks";
+import {
+  useCreateNote,
+  useDeleteNote,
+  useNotes,
+  useUpdateNote,
+} from "@/features/notes/hooks";
 import { useProjects } from "@/features/projects/hooks";
 import type { Note } from "@/types/note";
 import { useState } from "react";
@@ -19,6 +24,7 @@ export default function NotesPage() {
   const { data: projects } = useProjects();
   const createNoteMutation = useCreateNote();
   const updateNoteMutation = useUpdateNote();
+  const deleteNoteMutation = useDeleteNote();
 
   if (isPending) {
     return <p>Loading notes...</p>;
@@ -100,6 +106,16 @@ export default function NotesPage() {
         },
       },
     );
+  }
+
+  function handleDelete(noteId: string) {
+    const confirmed = window.confirm("Delete this note?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    deleteNoteMutation.mutate(noteId);
   }
 
   return (
@@ -201,6 +217,14 @@ export default function NotesPage() {
                   disabled={updateNoteMutation.isPending}
                 >
                   Edit
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleDelete(note.id)}
+                  disabled={deleteNoteMutation.isPending}
+                >
+                  {deleteNoteMutation.isPending ? "Deleting..." : "Delete"}
                 </button>
 
                 <hr />
