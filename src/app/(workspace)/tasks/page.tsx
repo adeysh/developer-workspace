@@ -1,6 +1,11 @@
 "use client";
 
-import { useTasks, useCreateTask, useUpdateTask } from "@/features/tasks/hooks";
+import {
+  useTasks,
+  useCreateTask,
+  useUpdateTask,
+  useDeleteTask,
+} from "@/features/tasks/hooks";
 import { useState } from "react";
 import { type Task, TASK_STATUSES, type TaskStatus } from "@/types/task";
 import { useProjects } from "@/features/projects/hooks";
@@ -21,6 +26,7 @@ export default function TasksPage() {
   const { data: projects } = useProjects();
   const createTaskMutation = useCreateTask();
   const updateTaskMutation = useUpdateTask();
+  const deleteTaskMutation = useDeleteTask();
 
   if (isPending) {
     return <p>Loading tasks...</p>;
@@ -99,6 +105,16 @@ export default function TasksPage() {
         },
       },
     );
+  }
+
+  function handleDelete(taskId: string) {
+    const confirmed = window.confirm("Delete this task?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    deleteTaskMutation.mutate(taskId);
   }
 
   return (
@@ -227,6 +243,14 @@ export default function TasksPage() {
                   disabled={updateTaskMutation.isPending}
                 >
                   Edit
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleDelete(task.id)}
+                  disabled={deleteTaskMutation.isPending}
+                >
+                  {deleteTaskMutation.isPending ? "Deleting..." : "Delete"}
                 </button>
                 <hr />
               </>
