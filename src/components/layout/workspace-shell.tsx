@@ -13,7 +13,7 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
       <div className="flex flex-1 flex-col">
         <Topbar />
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 px-8 py-4">{children}</main>
       </div>
     </div>
   );

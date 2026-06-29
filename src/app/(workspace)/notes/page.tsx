@@ -1,6 +1,6 @@
 "use client";
 
-import { NoteForm, NoteItem } from "@/features/notes/components";
+import { NoteItem, NotesHeader } from "@/features/notes/components";
 import { useNotes } from "@/features/notes/hooks";
 
 export default function NotesPage() {
@@ -20,16 +20,14 @@ export default function NotesPage() {
   }
 
   return (
-    <section>
-      <h1>Notes</h1>
+    <>
+      <NotesHeader />
 
-      <NoteForm />
-
-      {notes?.length === 0 && <p>No notes yet.</p>}
-
-      {notes?.map((note) => (
-        <NoteItem key={note.id} note={note} />
-      ))}
-    </section>
+      {notes?.length === 0 ? (
+        <p>No notes yet.</p>
+      ) : (
+        notes.map((note) => <NoteItem key={note.id} note={note} />)
+      )}
+    </>
   );
 }
