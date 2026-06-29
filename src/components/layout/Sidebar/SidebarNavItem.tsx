@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { NavigationItem } from "@/constants/navigation";
 import { useSidebar } from "@/providers/sidebar-provider";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 type SidebarNavItemProps = {
   item: NavigationItem;
@@ -17,21 +18,21 @@ export function SidebarNavItem({ item }: SidebarNavItemProps) {
   const isActive = pathname === item.href;
 
   return (
-    <Link
-      href={item.href}
+    <Button
+      asChild
+      variant="nav"
       className={cn(
-        "flex items-center gap-3 rounded-md px-3 py-2 transition-colors",
-        isActive ? "bg-muted font-semibold" : "hover:bg-muted",
-        collapsed && "justify-center",
+        "w-full",
+        collapsed && "justify-center px-0",
+        isActive &&
+          "shadow-[0_0_16px_rgba(91,92,235,0.18) border border-primary/20 bg-primary/10 text-primary transition-all duration-200 hover:-translate-y-0.5",
       )}
     >
-      <item.icon className="h-5 w-5 shrink-0" />
+      <Link href={item.href}>
+        <item.icon className="size-5" />
 
-      {!collapsed && (
-        <span className={isActive ? "bg-muted font-semibold" : ""}>
-          {item.label}
-        </span>
-      )}
-    </Link>
+        {!collapsed && <span>{item.label}</span>}
+      </Link>
+    </Button>
   );
 }

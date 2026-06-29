@@ -21,6 +21,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:brightness-95 active:brightness-90 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         // link: "text-primary underline-offset-4 hover:underline",
+        nav: "justify-start text-muted-foreground hover:bg-muted hover:text-foreground",
       },
       size: {
         default:
