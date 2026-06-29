@@ -20,7 +20,7 @@ export function Sidebar() {
         "h-screen",
         "flex-col",
         "border-r",
-        "border-border",
+        "border-layout-border",
         "bg-background",
       )}
     >

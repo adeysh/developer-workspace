@@ -2,6 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 
+import { Button } from "@/components/ui";
 import { useMounted } from "@/hooks/use-mounted";
 import { useTheme } from "@/hooks/use-theme";
 
@@ -16,13 +17,14 @@ export function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <button
+    <Button
       type="button"
+      variant="ghost"
+      size="icon"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className="rounded-md p-2 transition-colors hover:bg-muted"
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-    </button>
+      {isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}
+    </Button>
   );
 }

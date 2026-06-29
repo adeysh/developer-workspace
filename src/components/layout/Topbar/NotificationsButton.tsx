@@ -1,13 +1,18 @@
+"use client";
+
 import { Bell } from "lucide-react";
+
+import { Button } from "@/components/ui";
 
 export function NotificationsButton() {
   return (
-    <button
+    <Button
       type="button"
-      className="rounded-md p-2 transition-colors hover:bg-muted"
+      variant="ghost"
+      size="icon"
       aria-label="Notifications"
     >
-      <Bell className="h-5 w-5" />
-    </button>
+      <Bell className="size-5" />
+    </Button>
   );
 }

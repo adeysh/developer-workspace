@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Code, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 import { useSidebar } from "@/providers/sidebar-provider";
 
 export function SidebarHeader() {
@@ -11,7 +11,7 @@ export function SidebarHeader() {
 
   if (collapsed) {
     return (
-      <header className="flex h-16 items-center justify-center border-b">
+      <header className="flex h-16 items-center justify-center border-b border-layout-border">
         <div className="group relative isolate">
           {/* Home Button */}
           <Button
@@ -43,7 +43,7 @@ export function SidebarHeader() {
   }
 
   return (
-    <header className="flex h-16 items-center justify-between border-b px-6">
+    <header className="flex h-16 items-center justify-between border-b border-layout-border px-6">
       <Button asChild variant="ghost" size="icon">
         <Link href="/" aria-label="Home">
           <Code className="size-5" />

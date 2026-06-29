@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { NavigationItem } from "@/constants/navigation";
 import { useSidebar } from "@/providers/sidebar-provider";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 
 type SidebarNavItemProps = {
   item: NavigationItem;

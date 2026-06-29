@@ -39,6 +39,7 @@
   --info-soft: #eff6ff;
 
   --border: #e7e8ec;
+  --layout-border: #d9ddf8;
   --divider: #f0f1f3;
   --input: #e7e8ec;
   --ring: #5b5ceb;
@@ -96,6 +97,7 @@
   --info-soft: #182b47;
 
   --border: #2a3040;
+  --layout-border: #343a67;
   --divider: #222836;
   --input: #2a3040;
   --ring: #7274ff;
@@ -149,6 +151,7 @@
   --color-destructive-foreground: var(--destructive-foreground);
 
   --color-border: var(--border);
+  --color-layout-border: var(--layout-border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
@@ -190,17 +193,6 @@
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
   --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.12);
-
-  /* Spacing */
-
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-  --spacing-4xl: 6rem;
 }
 
 @layer base {
