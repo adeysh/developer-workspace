@@ -58,6 +58,8 @@
 
   --tag-pink-bg: #fdf2f8;
   --tag-pink-text: #db2777;
+
+  --shadow-hover: 0 10px 30px rgb(0 0 0 / 0.08);
 }
 
 .dark {
@@ -116,6 +118,8 @@
 
   --tag-pink-bg: #3d1f34;
   --tag-pink-text: #f472b6;
+
+  --shadow-hover: 0 0 24px rgb(91 92 235 / 0.15);
 }
 
 @theme {
@@ -193,6 +197,22 @@
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
   --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.12);
+
+  /* Tags */
+  --color-tag-purple-bg: var(--tag-purple-bg);
+  --color-tag-purple-text: var(--tag-purple-text);
+
+  --color-tag-blue-bg: var(--tag-blue-bg);
+  --color-tag-blue-text: var(--tag-blue-text);
+
+  --color-tag-green-bg: var(--tag-green-bg);
+  --color-tag-green-text: var(--tag-green-text);
+
+  --color-tag-orange-bg: var(--tag-orange-bg);
+  --color-tag-orange-text: var(--tag-orange-text);
+
+  --color-tag-pink-bg: var(--tag-pink-bg);
+  --color-tag-pink-text: var(--tag-pink-text);
 }
 
 @layer base {

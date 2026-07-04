@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { NoteItem, NotesHeader } from "@/features/notes/components";
+import {
+  NoteItem,
+  NotesHeader,
+  NotesSummary,
+} from "@/features/notes/components";
 import { useNotes } from "@/features/notes/hooks";
 import { CreateNoteSheet } from "@/features/notes/components";
 
@@ -25,6 +29,8 @@ export default function NotesPage() {
   return (
     <>
       <NotesHeader onNewNote={() => setIsCreateOpen(true)} />
+
+      <NotesSummary />
 
       <CreateNoteSheet open={isCreateOpen} onOpenChange={setIsCreateOpen} />
 
