@@ -39,3 +39,9 @@ export function mapNote(record: NoteRecord): Note {
     updatedAt: record.updated_at,
   };
 }
+
+export type NoteFormValues = {
+  title: string;
+  content: string;
+  projectId: string | null;
+};

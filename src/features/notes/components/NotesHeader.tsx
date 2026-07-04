@@ -3,7 +3,11 @@
 import { Plus, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui";
 
-export function NotesHeader() {
+type NotesHeaderProps = {
+  onNewNote: () => void;
+};
+
+export function NotesHeader({ onNewNote }: NotesHeaderProps) {
   return (
     <section className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
       <div className="space-y-2">
@@ -15,7 +19,7 @@ export function NotesHeader() {
       </div>
 
       <div className="flex items-center gap-3">
-        <Button>
+        <Button onClick={onNewNote}>
           <Plus className="size-4" />
           New Note
         </Button>

@@ -1,16 +1,36 @@
 "use client";
 
 import { useProjects } from "@/features/projects/hooks";
+import { type NoteFormValues } from "@/types/note";
 import { useState } from "react";
-import { useCreateNote } from "../hooks";
+import {
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Textarea,
+} from "@/components/ui";
 
-export function NoteForm() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [projectId, setProjectId] = useState<string | null>(null);
+type NoteFormProps = {
+  initialValues?: NoteFormValues;
+  onSubmit: (values: NoteFormValues) => void;
+  id?: string;
+};
+
+export function NoteForm({
+  id = "note-form",
+  initialValues,
+  onSubmit,
+}: NoteFormProps) {
+  const [title, setTitle] = useState(initialValues?.title ?? "");
+  const [content, setContent] = useState(initialValues?.content ?? "");
+  const [projectId, setProjectId] = useState<string | null>(
+    initialValues?.projectId ?? null,
+  );
 
   const { data: projects } = useProjects();
-  const createNoteMutation = useCreateNote();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,52 +43,73 @@ export function NoteForm() {
       return;
     }
 
-    createNoteMutation.mutate(
-      {
-        title: title.trim(),
-        content: content.trim(),
-        projectId,
-      },
-      {
-        onSuccess: () => {
-          setTitle("");
-          setContent("");
-          setProjectId(null);
-        },
-      },
-    );
+    onSubmit({
+      title: title.trim(),
+      content: content.trim(),
+      projectId,
+    });
   }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Note title"
-      />
+    <form id={id} onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-2">
+        <label
+          htmlFor="note-title"
+          className="text-sm font-medium text-foreground"
+        >
+          Title
+        </label>
 
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Note content"
-      />
+        <Input
+          id="note-title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter note title"
+        />
+      </div>
 
-      <select
-        title="project"
-        value={projectId ?? ""}
-        onChange={(e) => setProjectId(e.target.value || null)}
-      >
-        <option value="">No Project</option>
+      <div className="space-y-2">
+        <label
+          htmlFor="note-content"
+          className="text-sm font-medium text-foreground"
+        >
+          Content
+        </label>
 
-        {projects?.map((project) => (
-          <option key={project.id} value={project.id}>
-            {project.name}
-          </option>
-        ))}
-      </select>
+        <Textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Write your note..."
+        />
+      </div>
 
-      <button type="submit" disabled={createNoteMutation.isPending}>
-        {createNoteMutation.isPending ? "Creating..." : "Create Note"}
-      </button>
+      <div className="space-y-2">
+        <label
+          htmlFor="note-project"
+          className="text-sm font-medium text-foreground"
+        >
+          Project
+        </label>
+
+        <Select
+          value={projectId ?? ""}
+          onValueChange={(value) => setProjectId(value || null)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="No Project" />
+          </SelectTrigger>
+
+          <SelectContent>
+            <SelectItem value="">No Project</SelectItem>
+
+            {projects?.map((project) => (
+              <SelectItem key={project.id} value={project.id}>
+                {project.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
     </form>
   );
 }
