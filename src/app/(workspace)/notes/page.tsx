@@ -2,15 +2,19 @@
 
 import { useState } from "react";
 import {
-  NoteItem,
   NotesHeader,
+  NotesList,
   NotesSummary,
+  NotesToolbar,
 } from "@/features/notes/components";
 import { useNotes } from "@/features/notes/hooks";
 import { CreateNoteSheet } from "@/features/notes/components";
+import { EditNoteSheet } from "@/features/notes/components";
+import type { Note } from "@/types/note";
 
 export default function NotesPage() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editingNote, setEditingNote] = useState<Note | null>(null);
   const { data: notes, isPending, isError, error } = useNotes();
 
   if (isPending) {
@@ -26,19 +30,31 @@ export default function NotesPage() {
     );
   }
 
+  function handleEditNote(note: Note) {
+    setEditingNote(note);
+  }
+
   return (
     <>
       <NotesHeader onNewNote={() => setIsCreateOpen(true)} />
 
       <NotesSummary />
 
+      <NotesToolbar />
+
+      <NotesList notes={notes ?? []} onEdit={handleEditNote} />
+
       <CreateNoteSheet open={isCreateOpen} onOpenChange={setIsCreateOpen} />
 
-      {notes?.length === 0 ? (
-        <p>No notes yet.</p>
-      ) : (
-        notes.map((note) => <NoteItem key={note.id} note={note} />)
-      )}
+      <EditNoteSheet
+        note={editingNote}
+        open={editingNote !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setEditingNote(null);
+          }
+        }}
+      />
     </>
   );
 }
