@@ -14,6 +14,7 @@ export function NotesTableHeader() {
         notesTableColumns,
       )}
     >
+      <div className={headerClass}>#</div>
       <div className={headerClass}>Note</div>
       <div className={headerClass}>Project</div>
       <div className={headerClass}>Updated</div>

@@ -6,12 +6,18 @@ import type { Note } from "@/types/note";
 import { cn, notesTableColumns } from "@/lib/utils";
 
 type NoteItemProps = {
+  rowNumber: number;
   note: Note;
   projectName?: string;
   onEdit: (note: Note) => void;
 };
 
-export function NoteItem({ note, projectName, onEdit }: NoteItemProps) {
+export function NoteItem({
+  rowNumber,
+  note,
+  projectName,
+  onEdit,
+}: NoteItemProps) {
   return (
     <div
       className={cn(
@@ -20,6 +26,11 @@ export function NoteItem({ note, projectName, onEdit }: NoteItemProps) {
         notesTableColumns,
       )}
     >
+      {/* Serial no */}
+      <div className="text-sm font-medium text-muted-foreground">
+        {rowNumber}
+      </div>
+
       {/* Note */}
       <div className="min-w-0 space-y-1">
         <h3 className="truncate text-body font-semibold text-foreground">

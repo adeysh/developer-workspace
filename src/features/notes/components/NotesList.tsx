@@ -30,8 +30,13 @@ export function NotesList({ notes, onEdit }: NotesListProps) {
       <NotesGroup title="All Notes" count={notes.length}>
         <NotesTableHeader />
 
-        {notes.map((note) => (
-          <NoteItem key={note.id} note={note} onEdit={onEdit} />
+        {notes.map((note, index) => (
+          <NoteItem
+            key={note.id}
+            rowNumber={index + 1}
+            note={note}
+            onEdit={onEdit}
+          />
         ))}
       </NotesGroup>
     </NotesTable>
